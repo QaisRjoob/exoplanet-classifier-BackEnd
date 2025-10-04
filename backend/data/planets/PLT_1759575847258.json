@@ -1,0 +1,21 @@
+{
+  "planet_id": "PLT_1759575847258",
+  "koi_name": "Qais",
+  "koi_period": 4.0,
+  "koi_time0bk": 0.0,
+  "koi_impact": 0.0,
+  "koi_duration": 0.0,
+  "koi_depth": 5.0,
+  "koi_prad": 2.0,
+  "koi_teq": 0.0,
+  "koi_insol": 0.0,
+  "koi_steff": 0.0,
+  "koi_slogg": 0.0,
+  "koi_srad": 4.0,
+  "koi_kepmag": 0.0,
+  "additional_features": {},
+  "disposition": "CANDIDATE",
+  "notes": "Submitted from prediction form at 2025-10-04T11:04:07.258Z",
+  "submitted_by": "Web User",
+  "submitted_at": "2025-10-04T14:04:07.266808"
+}

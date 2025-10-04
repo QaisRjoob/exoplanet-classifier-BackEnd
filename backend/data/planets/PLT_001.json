@@ -1,0 +1,21 @@
+{
+  "planet_id": "PLT_001",
+  "koi_name": "K00001.01",
+  "koi_period": 15.2345,
+  "koi_time0bk": 131.5,
+  "koi_impact": 0.5,
+  "koi_duration": 3.2,
+  "koi_depth": 500.0,
+  "koi_prad": 2.5,
+  "koi_teq": 400.0,
+  "koi_insol": 10.5,
+  "koi_steff": 5800.0,
+  "koi_slogg": 4.5,
+  "koi_srad": 1.0,
+  "koi_kepmag": 14.5,
+  "additional_features": {},
+  "disposition": "CANDIDATE",
+  "notes": "Interesting candidate for follow-up",
+  "submitted_by": "Dr. Smith",
+  "submitted_at": "2025-10-04T13:59:38.444057"
+}
