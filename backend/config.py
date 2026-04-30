@@ -21,14 +21,8 @@ class Settings(BaseSettings):
     METADATA_PATH: str = "saved_models/model_metadata.pkl"
     MODEL_METADATA_PATH: str = "saved_models/model_metadata.pkl"  # Alias for compatibility
     
-    # CORS Settings (adjust for production)
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://localhost:8080",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:5173",
-    ]
+    # CORS Settings — allow all localhost/127.0.0.1 ports for local dev
+    CORS_ORIGINS: List[str] = ["*"]
     
     # Logging
     LOG_LEVEL: str = "INFO"

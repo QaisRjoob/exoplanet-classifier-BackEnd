@@ -2,7 +2,7 @@
 
 A GPU-accelerated machine learning backend for classifying **Kepler Objects of Interest (KOI)** — candidate exoplanets detected by NASA's Kepler Space Telescope. Given a set of KOI parameters, the model predicts whether the object is a **CONFIRMED** planet, a **CANDIDATE**, or a **FALSE POSITIVE**.
 
-> This API powers the [Cosmic Zoom Verse](https://github.com/) frontend — an interactive 3D space explorer built with React and Three.js.
+> This API powers the [Cosmic Zoom Verse](https://github.com/QaisRjoob/Nasa-exoplanet-explorer-cosmic-zoom-verse) frontend — an interactive 3D space explorer built with React and Three.js.
 
 ---
 
@@ -213,6 +213,42 @@ You can also trigger retraining at runtime via the `/training/start` endpoint.
 
 ---
 
+## Sample Data for Testing
+
+The `sample_data/` folder contains 23 ready-to-use CSV files. Two good starting points:
+
+### 1. `sample_small_test.csv` — Quick smoke test (5 rows)
+
+A tiny file with 5 KOI entries — ideal for a first test to confirm the API is working.
+
+```bash
+curl -X POST http://localhost:8000/predict/csv \
+  -F "file=@sample_data/sample_small_test.csv"
+```
+
+| Rows | Classes present | Use case |
+|------|----------------|----------|
+| 5 | Mixed | Fast API check, zero wait |
+
+---
+
+### 2. `sample_mixed_balanced.csv` — Balanced batch test (30 rows)
+
+30 real-world KOI entries with an even spread of CONFIRMED, CANDIDATE, and FALSE POSITIVE labels — useful for verifying the model gives all three output classes.
+
+```bash
+curl -X POST http://localhost:8000/predict/csv \
+  -F "file=@sample_data/sample_mixed_balanced.csv"
+```
+
+| Rows | Classes present | Use case |
+|------|----------------|----------|
+| 30 | CONFIRMED · CANDIDATE · FALSE POSITIVE | Balanced end-to-end batch test |
+
+> **In the UI:** go to **Add Exoplanet Data → Upload CSV File from many planets**, drag either file in, and hit Upload.
+
+---
+
 ## Model Details
 
 The classifier is a **stacking ensemble**:
@@ -240,7 +276,7 @@ The companion frontend is **Cosmic Zoom Verse** — an immersive 3D space explor
 - Browse and manage saved planet predictions
 - Monitor model training metrics and performance charts
 
-**Repository:** [cosmic-zoom-verse](https://github.com/your-username/cosmic-zoom-verse)  
+**Repository:** [cosmic-zoom-verse](https://github.com/QaisRjoob/Nasa-exoplanet-explorer-cosmic-zoom-verse)  
 **Stack:** React 18 · TypeScript · Three.js · Tailwind CSS · shadcn/ui
 
 To connect the frontend to this backend, set `VITE_API_URL=http://localhost:8000` in the frontend `.env`.
