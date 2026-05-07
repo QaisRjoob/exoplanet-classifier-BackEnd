@@ -4,7 +4,7 @@ Production-ready API with model caching and comprehensive error handling
 """
 from fastapi import FastAPI, HTTPException, status, Request, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.exceptions import RequestValidationError
 import logging
 from pathlib import Path
@@ -2079,6 +2079,66 @@ def _create_flexible_planet_from_row(row: pd.Series, column_mapping: Dict[str, s
 
 
 # Error handlers
+SAMPLE_DIR = Path(__file__).parent.parent / "sample_data"
+
+SAMPLE_META = {
+    "sample_small_test.csv":       {"rows": 5,   "desc": "Quick smoke test — 5 rows, mixed classes"},
+    "sample_single_prediction.csv":{"rows": 1,   "desc": "Single row for one-shot prediction testing"},
+    "sample_batch_prediction.csv": {"rows": 20,  "desc": "20 rows for batch prediction endpoint testing"},
+    "sample_confirmed_planets.csv":{"rows": 10,  "desc": "10 confirmed planets only"},
+    "sample_candidate_planets.csv":{"rows": 10,  "desc": "10 candidates only"},
+    "sample_false_positives.csv":  {"rows": 10,  "desc": "10 false positives only"},
+    "sample_mixed_balanced.csv":   {"rows": 30,  "desc": "30 rows balanced across all 3 classes"},
+    "sample_multi_balanced.csv":   {"rows": 60,  "desc": "60 rows — double-size balanced set"},
+    "sample_high_confidence.csv":  {"rows": 30,  "desc": "30 high-confidence predictions"},
+    "sample_random_diverse.csv":   {"rows": 50,  "desc": "50 randomly diverse KOI objects"},
+    "sample_large_test.csv":       {"rows": 100, "desc": "100 rows for performance / stress testing"},
+    "sample_earth_like.csv":       {"rows": 30,  "desc": "30 Earth-like planet candidates"},
+    "sample_super_earths.csv":     {"rows": 30,  "desc": "30 super-Earth candidates"},
+    "sample_hot_jupiters.csv":     {"rows": 25,  "desc": "25 hot Jupiter candidates"},
+    "sample_mini_neptunes.csv":    {"rows": 30,  "desc": "30 mini-Neptune candidates"},
+    "sample_cool_planets.csv":     {"rows": 30,  "desc": "30 cool/cold-zone planets"},
+    "sample_short_period.csv":     {"rows": 30,  "desc": "30 short orbital period objects"},
+    "sample_long_period.csv":      {"rows": 30,  "desc": "30 long orbital period objects"},
+    "sample_transit_variety.csv":  {"rows": 30,  "desc": "30 objects with varied transit depths"},
+    "sample_sun_like_stars.csv":   {"rows": 30,  "desc": "30 KOIs orbiting Sun-like host stars"},
+    "sample_edge_cases.csv":       {"rows": 10,  "desc": "10 borderline/edge-case signals"},
+    "sample_extreme_cases.csv":    {"rows": 20,  "desc": "20 extreme parameter values"},
+    "sample_key_features.csv":     {"rows": 20,  "desc": "20 rows highlighting key model features"},
+}
+
+
+@app.get("/data/samples", tags=["Data Management"])
+async def list_sample_files():
+    """List all available sample CSV files for testing."""
+    files = []
+    for filename, meta in SAMPLE_META.items():
+        path = SAMPLE_DIR / filename
+        files.append({
+            "filename": filename,
+            "rows": meta["rows"],
+            "description": meta["desc"],
+            "available": path.exists(),
+        })
+    return {"samples": files, "total": len(files)}
+
+
+@app.get("/data/samples/{filename}", tags=["Data Management"])
+async def download_sample_file(filename: str):
+    """Download a specific sample CSV file."""
+    if not filename.endswith(".csv") or "/" in filename or "\\" in filename:
+        raise HTTPException(status_code=400, detail="Invalid filename")
+    path = SAMPLE_DIR / filename
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"Sample file '{filename}' not found")
+    return FileResponse(
+        path=str(path),
+        media_type="text/csv",
+        filename=filename,
+        headers={"Content-Disposition": f"attachment; filename={filename}"},
+    )
+
+
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     """Handle validation errors"""
