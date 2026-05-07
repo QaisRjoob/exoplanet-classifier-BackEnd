@@ -33,8 +33,8 @@ env/
 *.swo
 *~
 
-# Model files (large)
-backend/saved_models/*.pkl
+# Model files tracked by git — required for deployment
+# backend/saved_models/*.pkl
 
 # Data files (large CSV datasets)
 cumulative_*.csv

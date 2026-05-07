@@ -1,6 +1,7 @@
 """
 Configuration settings for the FastAPI application
 """
+import os
 from pydantic_settings import BaseSettings
 from pathlib import Path
 from typing import List
@@ -14,7 +15,7 @@ class Settings(BaseSettings):
     API_DESCRIPTION: str = "API for classifying Kepler Objects of Interest (KOI) into CONFIRMED, CANDIDATE, or FALSE POSITIVE using GPU-accelerated ensemble ML"
     API_VERSION: str = "1.0.0"
     API_HOST: str = "0.0.0.0"
-    API_PORT: int = 8000
+    API_PORT: int = int(os.environ.get("PORT", 8000))
     
     # Model Settings
     MODEL_PATH: str = "saved_models/stacking_model.pkl"

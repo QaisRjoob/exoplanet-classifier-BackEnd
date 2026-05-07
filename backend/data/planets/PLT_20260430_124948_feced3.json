@@ -1,0 +1,18 @@
+{
+  "planet_id": "PLT_20260430_124948_feced3",
+  "planet_name": "Planet PLT_20260430_124948_feced3",
+  "notes": null,
+  "disposition": "CANDIDATE",
+  "prediction_confidence": 0.7898780124875593,
+  "prediction_probabilities": {
+    "0": 0.1992481034093336,
+    "1": 0.7898780124875593,
+    "2": 0.010873884103107127
+  },
+  "submitted_at": "2026-04-30T12:49:48.650949",
+  "predicted_at": "2026-04-30T12:49:48.650949",
+  "koi_period": 10.0,
+  "koi_depth": 500.0,
+  "koi_prad": 2.0,
+  "koi_teq": 400.0
+}
