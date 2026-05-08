@@ -10,6 +10,7 @@ This API powers the [Cosmic Zoom Verse](https://github.com/QaisRjoob/Nasa-exopla
 
 > **Backend API:** https://nasa-kepler-sight-backend.onrender.com
 > **Frontend App:** https://nasa-kepler-sight.onrender.com
+> **Frontend GitHub:** https://github.com/QaisRjoob/Nasa-Kepler-Sight.git
 
 ---
 
