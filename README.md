@@ -8,8 +8,8 @@ This API powers the [Cosmic Zoom Verse](https://github.com/QaisRjoob/Nasa-exopla
 
 ## Live Demo
 
-> **Backend API:** _Link will be added after deployment on Render_  
-> **Frontend App:** _Link will be added after deployment on Render_
+> **Backend API:** https://nasa-kepler-sight-backend.onrender.com
+> **Frontend App:** https://nasa-kepler-sight.onrender.com
 
 ---
 
